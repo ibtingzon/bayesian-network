@@ -1,0 +1,158 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@3f301de3";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@668c2ed7";
+	node_size = (130.0 55.0);
+	huginenginegenerator3061656038650325130L = "edu.ucla.belief.inference.JoinTreeSettings@57b625f0";
+}
+
+node Income
+{
+	states = ("i0" "i1" "i2" );
+	position = (331 -27);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable2";
+	label = "Income";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Assets
+{
+	states = ("s0" "s1" );
+	position = (170 -175);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable3";
+	label = "Assets";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Reliability
+{
+	states = ("r0" "r1" );
+	position = (675 -401);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable8";
+	label = "Reliability";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Future_Income
+{
+	states = ("f0" "f1" );
+	position = (357 -257);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable7";
+	label = "Future_Income";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Ratio_Debts_Income
+{
+	states = ("d0" "d1" );
+	position = (570 -20);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable4";
+	label = "Ratio_Debts_Income";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Age
+{
+	states = ("a0" "a1" );
+	position = (928 -121);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable6";
+	label = "Age";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Credit_Worthiness
+{
+	states = ("c0" "c1" );
+	position = (462 -515);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable9";
+	label = "Credit_Worthiness";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node Payment_History
+{
+	states = ("h0" "h1" "h2" );
+	position = (675 -250);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable5";
+	label = "Payment_History";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+potential ( Income | )
+{
+	data = (	0.3	0.4	0.3	);
+}
+potential ( Assets | Income )
+{
+	data = ((	0.95	0.05	)
+		(	0.35	0.65	)
+		(	0.2	0.8	));
+}
+potential ( Reliability | Payment_History Age )
+{
+	data = (((	0.7	0.3	)
+		(	0.45	0.55	))
+		((	0.4	0.6	)
+		(	0.15	0.85	))
+		((	0.3	0.7	)
+		(	0.05	0.95	)));
+}
+potential ( Future_Income | Income Assets )
+{
+	data = (((	0.95	0.05	)
+		(	0.45	0.55	))
+		((	0.4	0.6	)
+		(	0.35	0.65	))
+		((	0.3	0.7	)
+		(	0.1	0.9	)));
+}
+potential ( Ratio_Debts_Income | )
+{
+	data = (	0.45	0.55	);
+}
+potential ( Age | )
+{
+	data = (	0.4	0.6	);
+}
+potential ( Credit_Worthiness | Reliability Future_Income Ratio_Debts_Income )
+{
+	data = ((((	0.6	0.4	)
+		(	0.8	0.2	))
+		((	0.4	0.6	)
+		(	0.6	0.4	)))
+		(((	0.4	0.6	)
+		(	0.55	0.45	))
+		((	0.01	0.99	)
+		(	0.4	0.6	))));
+}
+potential ( Payment_History | Age Ratio_Debts_Income )
+{
+	data = (((	0.2	0.45	0.35	)
+		(	0.8	0.15	0.05	))
+		((	0.02	0.28	0.7	)
+		(	0.4	0.35	0.25	)));
+}
